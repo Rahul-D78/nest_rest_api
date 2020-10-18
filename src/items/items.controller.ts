@@ -1,11 +1,25 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Dependencies } from '@nestjs/common';
 import { CreateItemDto } from './dto/create-item-dto';
+import { ItemsService } from './items.service';
+import { Item } from './interfaces/item.interface';
+
 
 @Controller('items')
+
+// Before using the service i have to inject it as a Dependency
+
 export class ItemsController {
+
+    // within the class add a constructor does not need anything in the constructor body but the parameaters where we 
+    // inject the dependencies
+
+    constructor(private readonly itemsService: ItemsService) {
+        
+    }
+
     @Get()
-    findAll(): string {
-        return 'get all items';
+    findAll(): Item[] {
+        return this.itemsService.findAll();
     }
 
     @Get(':id')
