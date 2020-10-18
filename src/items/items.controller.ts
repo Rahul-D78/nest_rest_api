@@ -22,8 +22,8 @@ export class ItemsController {
     }
 
     @Get()
-    findAll(): Item[] {
-        return this.itemsService.findAll();
+    async findAll(): Promise<Item[]>{
+        return await this.itemsService.findAll();
     }
 
     // @Get()
@@ -33,8 +33,8 @@ export class ItemsController {
 
     //for the findone method
     @Get(':id')
-    findOne(@Param('id') id): Item {
-        return this.itemsService.findOne(id);
+    async findOne(@Param('id') id): Promise<Item> {
+        return await this.itemsService.findOne(id);
     }
 
 
